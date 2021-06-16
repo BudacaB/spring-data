@@ -1,18 +1,24 @@
 package com.spring.data.springdata.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+@Entity
 public class Flight {
-    private String id;
+    @Id
+    @GeneratedValue
+    private Long id;
     private String origin;
     private String destination;
     private LocalDateTime scheduledAt;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
