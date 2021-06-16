@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,7 +19,7 @@ import java.util.Iterator;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @RunWith(SpringRunner.class)
-@DataMongoTest
+@DataJpaTest
 public class PagingAndSortingTests {
 
     @Autowired
