@@ -18,28 +18,27 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-class SpringDataTests {
+class CrudTests {
 
 	@Autowired
-	private EntityManager entityManager;
+	private FlightRepository flightRepository;
 
 	@Test
-	public void verifyFlightsCanBeSaved() {
+	public void shouldPerformCRUDOperations() {
 		final Flight flight = new Flight();
 		flight.setOrigin("London");
 		flight.setDestination("New York");
 		flight.setScheduledAt(LocalDateTime.parse("2011-12-13T12:12:00"));
 
-		entityManager.persist(flight);
-		
-		final TypedQuery<Flight> results = entityManager
-				.createQuery("SELECT f FROM Flight f", Flight.class);
+		flightRepository.save(flight);
 
-		final List<Flight> resultList = results.getResultList();
-
-		Assertions.assertThat(resultList)
+		Assertions.assertThat(flightRepository.findAll())
 				.hasSize(1)
 				.first()
 				.isEqualTo(flight);
+
+		flightRepository.delete(flight);
+
+		Assertions.assertThat(flightRepository.count()).isZero();
 	}
 }
