@@ -1,11 +1,15 @@
 package com.spring.data.springdata.repository;
 
 import com.spring.data.springdata.entity.Flight;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface FlightRepository extends CrudRepository<Flight, Long> {
+public interface FlightRepository extends PagingAndSortingRepository<Flight, Long> {
 
     List<Flight> findByOrigin(String origin);
 
@@ -16,4 +20,6 @@ public interface FlightRepository extends CrudRepository<Flight, Long> {
     List<Flight> findByOriginAndDestinationIn(String origin, String ... destinations);
 
     List<Flight> findByOriginIgnoreCase(String origin);
+
+    Page<Flight> findByOrigin(String origin, Pageable pageRequest);
 }
